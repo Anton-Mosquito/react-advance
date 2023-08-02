@@ -11,10 +11,8 @@ export enum RouteNames {
 
 export const publicRoutes: IRoute[] = [
   {path: RouteNames.LOGIN },
-  //{ path: '*', element: <Navigate to=RouteNames.LOGIN replace />}
 ];
 
 export const privateRoutes: IRoute[] = [
   {path: RouteNames.EVENT },
-  //{ path: '*', element: <Navigate to=RouteNames.EVENT replace />}
 ]
