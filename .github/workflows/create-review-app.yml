@@ -25,6 +25,7 @@ jobs:
           name: build
           path: build
   deploy:
+    if: "!conatins(${{github.event.pull_request.title}} , 'SKIP REVIEW')"
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -47,3 +48,11 @@ jobs:
         env:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_USER: ${{ secrets.SSH_USER }}
+      - name: Post review app url
+        uses: mshick/add-pr-comment@v1
+        with:
+          message: Created new review app at ${{ env.REVIEW_APP_URL }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+        env: 
+          REVIEW_APP_URL: http://${{ github.head_ref }}-${{ secrets.API_URL }}
+  
